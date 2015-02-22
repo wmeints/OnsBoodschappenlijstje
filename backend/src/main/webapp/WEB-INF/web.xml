@@ -24,7 +24,7 @@
       </servlet-class>
       <init-param>
         <param-name>com.sun.jersey.config.property.packages</param-name>
-        <param-value>ons-boodschappen-lijstje</param-value>
+        <param-value>boodschappenlijstje.endpoints</param-value>
       </init-param>
       <load-on-startup>1</load-on-startup>
     </servlet>
