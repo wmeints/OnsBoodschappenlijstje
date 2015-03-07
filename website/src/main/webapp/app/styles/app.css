@@ -7,6 +7,14 @@ md-toolbar h1 {
     padding-right: 16px;
 }
 
+.todo-item md-item-content {
+    padding-right: 16px;
+}
+
+.completed-todo-item .md-label {
+    text-decoration: line-through;
+}
+
 .subtle {
     color: #c0c0c0;
 }
