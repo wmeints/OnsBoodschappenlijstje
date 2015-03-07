@@ -6,6 +6,9 @@ Deze app kun je gebruiken om een gezamelijke boodschappenlijst bijhouden.
 Items die de ander op de lijst zet, zie je automatisch terug op je telefoon. 
 Vink items app en de ander ziet dat jij dat item hebt gekocht.
 
+![Screenshot](https://raw.githubusercontent.com/wmeints/OnsBoodschappenlijstje/master/screenshots/Schermafbeelding%202015-03-07%20om%2020.01.09.png)
+
+
 ## Voor welke devices werkt deze app?
 We hebben voor Android en iPhone een app ontwikkeld, omdat we hiervan gebruik maken. 
 Je bent van harte welkom om de app te maken voor andere devices.
