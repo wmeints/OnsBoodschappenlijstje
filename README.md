@@ -4,7 +4,7 @@ Deze repository bevat de "ons boodschappenlijstje" app. Een knutselwerk van Aafk
 ## Wat doet deze app?
 Deze app kun je gebruiken om een gezamelijke boodschappenlijst bijhouden. 
 Items die de ander op de lijst zet, zie je automatisch terug op je telefoon. 
-Vink items app en de ander ziet dat jij dat item hebt gekocht.
+Vink items af en de ander ziet dat jij dat item hebt gekocht.
 
 ![Screenshot](https://raw.githubusercontent.com/wmeints/OnsBoodschappenlijstje/master/screenshots/Schermafbeelding%202015-03-07%20om%2020.01.09.png)
 
