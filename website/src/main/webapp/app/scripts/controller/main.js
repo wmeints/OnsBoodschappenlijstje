@@ -12,9 +12,9 @@
             }
         ];
 	
-	vm.removeItem = function(item) {
-		vm.items.remove(item);
-	};
+	      vm.removeItem = function(item) {
+		        vm.items.pop(item);
+	      };
 
         vm.saveItem = function() {
             // Make the input simple, by allowing the user to enter Stuff @ Winkel
