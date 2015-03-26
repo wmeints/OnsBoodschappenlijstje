@@ -1,6 +1,5 @@
 package entity;
 
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.PersistenceContext;
 import javax.persistence.EntityManager;
@@ -38,7 +37,9 @@ class LijstRepository {
     public void delete(Lijst item){
         EntityTransaction et = entityManager.getTransaction();
         et.begin();
-        entityManager.createQuery("DELETE FROM Lijst WHERE id = :id").setParameter("id", item.getId());
+        entityManager.remove(item);
+        
+        //int deletedItem = entityManager.createQuery("DELETE FROM Lijst l WHERE l.id = :id").setParameter("id", item.getId()).executeUpdate();
         entityManager.flush();
         et.commit();  
     }

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package entity;
 
 import java.util.List;
@@ -15,13 +10,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-/**
- *
- * @author ame20844
- */
-public class LijstRepositoryTests {
+public class LijstRepositoryTest {
     private EntityManager entityManager;
     private LijstRepository lijstRepository;
+    private Lijst l2;
     
     @Before
     public void setup() {
@@ -35,7 +27,7 @@ public class LijstRepositoryTests {
         l.setItem("Brood");
         l.setWinkel("AH");
         lijstRepository.update(l);
-        Lijst l2 = new Lijst();
+        l2 = new Lijst();
         l2.setDone(Boolean.TRUE);
         l2.setItem("Paracetamol");
         l2.setWinkel("Kruidvat");
@@ -56,12 +48,7 @@ public class LijstRepositoryTests {
     
     @Test
     public void testDelete() {
-        Lijst l3 = new Lijst();
-        l3.setDone(Boolean.TRUE);
-        l3.setItem("toiletpapier");
-        l3.setWinkel("kruidvat");
-        lijstRepository.update(l3);
-        lijstRepository.delete(l3);
+        lijstRepository.delete(l2);
         List<Lijst> items = lijstRepository.getItems();
         Assert.assertEquals("Delete item niet gelukt", 2, items.size());
     }
