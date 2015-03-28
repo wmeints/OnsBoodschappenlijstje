@@ -18,7 +18,8 @@ class LijstRepository {
     }
     
     public List<Lijst> getItems() {
-        return entityManager.createQuery("SELECT l FROM Lijst l",Lijst.class).getResultList();
+        List<Lijst> resultSet = entityManager.createQuery("SELECT p FROM Lijst p ORDER BY p.done, p.winkel, p.item", Lijst.class).getResultList();
+        return resultSet;
     }
     
     public Lijst findByID(int id) {
@@ -38,8 +39,6 @@ class LijstRepository {
         EntityTransaction et = entityManager.getTransaction();
         et.begin();
         entityManager.remove(item);
-        
-        //int deletedItem = entityManager.createQuery("DELETE FROM Lijst l WHERE l.id = :id").setParameter("id", item.getId()).executeUpdate();
         entityManager.flush();
         et.commit();  
     }
