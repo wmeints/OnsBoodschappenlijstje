@@ -5,18 +5,23 @@
         vm.newItemText = '';
         vm.items = [];
 
+        init();
+
         vm.isSelected = function(item) {
             return item.done;
         };
 
         vm.updateItemStatus = function(item) {
-            //TODO: Send the update of the status to the server
             item.done = !item.done;
+
+            //TODO: Send the update of the status to the server
+            // PUT http://localhost:3000/api/items/{id}
         }
 
         vm.removeItem = function(item) {
             vm.items.pop(item);
             //TODO: Send the delete operation to the server
+            // DELETE http://localhost:3000/api/items/{id}
         };
 
         vm.saveItem = function() {
@@ -40,6 +45,7 @@
             });
 
             //TODO: Send the item to the server.
+            // POST http://localhost:3000/api/items
 
             vm.newItemText = '';
             vm.newItemWinkel = '';
@@ -56,6 +62,11 @@
                 //TODO: Refresh screen
             });
         };
+
+        function init() {
+          //TODO: Load items from the server
+          // GET http://localhost:3000/api/items
+        }
     };
 
     function TaskDialogController($scope,$mdDialog,item) {
@@ -80,6 +91,7 @@
             item.winkel = winkelText;
 
             //TODO: Save the item on the server
+            // PUT http://localhost:3000/api/items/{id}
 
             $mdDialog.hide();
         };
