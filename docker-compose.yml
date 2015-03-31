@@ -1,0 +1,18 @@
+proxy:
+  build: ./proxy/
+  ports: 
+    - "8080:8080"
+  links:
+    - backend
+    - frontend
+backend:
+  build: ./backend/
+  links:
+    - db
+frontend:
+  build: ./website/
+db:
+  image: "mysql:5.6"
+  environment:
+    MYSQL_ROOT_PASSWORD: "nhYRPyFGEYHMQQVRC7a4"
+
