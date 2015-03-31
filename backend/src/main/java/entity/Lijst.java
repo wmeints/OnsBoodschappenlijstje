@@ -45,6 +45,12 @@ public class Lijst implements Serializable {
     public Lijst(Integer id) {
         this.id = id;
     }
+    
+    public Lijst(String item, String winkel) {
+        this.item = item;
+        this.winkel = winkel;
+        this.done = false;
+    }
 
     public Integer getId() {
         return id;

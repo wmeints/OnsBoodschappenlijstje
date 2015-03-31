@@ -29,12 +29,12 @@ public class LijstRepositoryTest {
         l.setDone(Boolean.FALSE);
         l.setItem("Brood");
         l.setWinkel("AH");
-        lijstRepository.update(l);
+        lijstRepository.CreateOrChangeItem(l);
         l2 = new Lijst();
         l2.setDone(Boolean.TRUE);
         l2.setItem("Snoep");
         l2.setWinkel("Kruidvat");
-        lijstRepository.update(l2);
+        lijstRepository.CreateOrChangeItem(l2);
     }
 
     @After
@@ -62,19 +62,18 @@ public class LijstRepositoryTest {
         l3.setDone(Boolean.FALSE);
         l3.setItem("Pindakaas");
         l3.setWinkel("AH");
-        lijstRepository.update(l3);
+        lijstRepository.CreateOrChangeItem(l3);
         Lijst l4 = new Lijst();
         l4.setDone(Boolean.TRUE);
         l4.setItem("Paracetamol");
         l4.setWinkel("AH");
-        lijstRepository.update(l4);
+        lijstRepository.CreateOrChangeItem(l4);
         //l, l3, l4, l2.
         List<Lijst> compareTo = new ArrayList();
         compareTo.add(l);
         compareTo.add(l3);
         compareTo.add(l4);
-        compareTo.add(l2);
-        
+        compareTo.add(l2);       
 
         List<String> ExpectedOutcomesItem = new ArrayList();
         ExpectedOutcomesItem.add("Brood");

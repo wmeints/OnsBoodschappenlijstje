@@ -5,7 +5,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
-class LijstRepository {
+public class LijstRepository {
     
     @PersistenceContext
     private EntityManager entityManager;
@@ -26,7 +26,7 @@ class LijstRepository {
         return entityManager.createNamedQuery("Lijst.findById", Lijst.class).setParameter("id", id).getSingleResult();
     }
     
-    public Lijst update(Lijst item){
+    public Lijst CreateOrChangeItem(Lijst item){
         EntityTransaction et = entityManager.getTransaction();
         et.begin();
         Lijst updatedRows = entityManager.merge(item);
