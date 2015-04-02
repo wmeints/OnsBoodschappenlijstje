@@ -13,31 +13,34 @@ import javax.ws.rs.*;
 @Component
 @Path("/item")
 public class BoodschappenResource {
+    private LijstRepository lijstRepository;
 
     @Autowired
-    private LijstRepository lijstrepository;
+    public BoodschappenResource(LijstRepository lijstRepository) {
+        this.lijstRepository = lijstRepository;
+    }
 
     @GET
     public Response getBoodschappenLijst() {
-        return Response.status(200).entity(lijstrepository.findAll()).build();
+        return Response.status(200).entity(lijstRepository.findAll()).build();
     }
 
     @POST
     public Response createItem(CreateItemData data) {
-        Lijst insertedItem = lijstrepository.save(new Lijst(data.getItem(), data.getWinkel()));
+        Lijst insertedItem = lijstRepository.save(new Lijst(data.getItem(), data.getWinkel()));
         return Response.status(200).entity(insertedItem).build();
     }
 
     @PUT
     @Path("{id}")
     public Response updateItem(@PathParam("id") int id) {
-        return Response.status(200).entity(lijstrepository.save(lijstrepository.findById(id))).build();
+        return Response.status(200).entity(lijstRepository.save(lijstRepository.findById(id))).build();
     }
     
     @DELETE
     @Path("{id}")
     public Response deleteItem(@PathParam("id") int id) {
-        lijstrepository.remove(lijstrepository.findById(id));
+        lijstRepository.remove(lijstRepository.findById(id));
         return Response.noContent().build();
     }
 }
