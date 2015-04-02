@@ -1,5 +1,6 @@
 package boodschappenlijstje;
 
+import boodschappenlijstje.endpoints.BoodschappenResource;
 import boodschappenlijstje.endpoints.VersionResource;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.springframework.stereotype.Component;
@@ -8,5 +9,6 @@ import org.springframework.stereotype.Component;
 public class Application extends ResourceConfig {
     public Application() {
         register(VersionResource.class);
+        register(BoodschappenResource.class);
     }
 }

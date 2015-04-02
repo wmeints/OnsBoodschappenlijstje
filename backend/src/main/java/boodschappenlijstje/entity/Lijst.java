@@ -1,4 +1,4 @@
-package entity;
+package boodschappenlijstje.entity;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
@@ -52,6 +52,12 @@ public class Lijst implements Serializable {
         this.done = false;
     }
 
+    public Lijst(Boolean done, String item, String winkel) {
+        this.done = done;
+        this.item = item;
+        this.winkel = winkel;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -102,7 +108,7 @@ public class Lijst implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.Lijst[ id=" + id + " ]";
+        return "boodschappenlijstje.entity.Lijst[ id=" + id + " ]";
     }
     
 }
