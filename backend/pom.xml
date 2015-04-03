@@ -5,6 +5,8 @@
     <artifactId>backend</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
+    <name>Ons boodschappenlijstje backend</name>
+    <url>http://github.com/wmeints/onsboodschappenlijstje</url>
     <properties>
         <jersey.version>2.16</jersey.version>
         <spring.version>4.1.5.RELEASE</spring.version>

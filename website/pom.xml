@@ -5,8 +5,8 @@
   <artifactId>website</artifactId>
   <packaging>war</packaging>
   <version>1.0-SNAPSHOT</version>
-  <name>website Maven Webapp</name>
-  <url>http://maven.apache.org</url>
+  <name>Ons boodschappenlijstje frontend</name>
+  <url>http://github.com/wmeints/onsboodschappenlijstje</url>
     <properties>
         <spring.version>4.1.5.RELEASE</spring.version>
     </properties>
