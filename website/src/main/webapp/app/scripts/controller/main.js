@@ -1,5 +1,5 @@
 (function(angular) {
-    function MainController($mdDialog, TaskDialogCtrl) {
+    function MainController($mdDialog, BoodschappenService) {
         var vm = this;
 
         vm.newItemText = '';
@@ -14,14 +14,23 @@
         vm.updateItemStatus = function(item) {
             item.done = !item.done;
 
-            //TODO: Send the update of the status to the server
-            // PUT http://localhost:3000/api/items/{id}
-        }
+            BoodschappenService.update(item.id, {
+                item: item.item,
+                winkel: item.winkel,
+                done: item.done
+            }).success(function() {
+                BoodschappenService.findAll().success(function(data) {
+                    vm.items = data;
+                });
+            });
+        };
 
         vm.removeItem = function(item) {
-            vm.items.pop(item);
-            //TODO: Send the delete operation to the server
-            // DELETE http://localhost:3000/api/items/{id}
+            BoodschappenService.remove(item.id).then(function() {
+                BoodschappenService.findAll().success(function(data) {
+                    vm.items = data;
+                });
+            });
         };
 
         vm.saveItem = function() {
@@ -44,8 +53,14 @@
                 winkel: winkelText
             });
 
-            //TODO: Send the item to the server.
-            // POST http://localhost:3000/api/items
+            BoodschappenService.create({
+                item: itemText,
+                winkel: winkelText
+            }).success(function() {
+                BoodschappenService.findAll().success(function(data) {
+                    vm.items = data;
+                });
+            });
 
             vm.newItemText = '';
             vm.newItemWinkel = '';
@@ -59,13 +74,16 @@
                 },
                 controller: TaskDialogController
             }).then(function() {
-                //TODO: Refresh screen
+                BoodschappenService.findAll().success(function(data) {
+                    vm.items = data;
+                });
             });
         };
 
         function init() {
-          //TODO: Load items from the server
-          // GET http://localhost:3000/api/items
+            BoodschappenService.findAll().success(function(data) {
+               vm.items = data;
+            });
         }
     };
 
@@ -90,10 +108,12 @@
             item.item = itemText;
             item.winkel = winkelText;
 
-            //TODO: Save the item on the server
-            // PUT http://localhost:3000/api/items/{id}
-
-            $mdDialog.hide();
+            BoodschappenService.update(item.id, {
+                item: itemText,
+                winkel: winkelText
+            }).success(function() {
+                $mdDialog.hide();
+            });
         };
 
         $scope.cancel = function() {
@@ -101,7 +121,7 @@
         };
     };
 
-    MainController.$inject = ['$mdDialog'];
+    MainController.$inject = ['$mdDialog', 'BoodschappenService'];
 
     angular.module('boodschappenlijstje').controller('MainCtrl',MainController);
 })(angular);

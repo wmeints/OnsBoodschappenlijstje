@@ -9,6 +9,7 @@
   <url>http://github.com/wmeints/onsboodschappenlijstje</url>
     <properties>
         <spring.version>4.1.5.RELEASE</spring.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
   <dependencies>
       <dependency>

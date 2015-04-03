@@ -63,6 +63,7 @@
     <script type="text/javascript" src="app/bower_components/angular-material/angular-material.min.js"></script>
     <script type="text/javascript" src="app/bower_components/angular-ui/build/angular-ui.min.js"></script>
     <script type="text/javascript" src="app/scripts/app.js"></script>
+    <script type="text/javascript" src="app/scripts/service/boodschappen.js"></script>
     <script type="text/javascript" src="app/scripts/controller/main.js"></script>
 </body>
 </html>
