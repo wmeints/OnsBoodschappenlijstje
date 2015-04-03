@@ -46,11 +46,8 @@ public class LijstRepositoryImpl implements LijstRepository {
     @Override
     @Transactional
     public void remove(Lijst item){
-        EntityTransaction et = entityManager.getTransaction();
-        et.begin();
         entityManager.remove(item);
         entityManager.flush();
-        et.commit();
     }
 }
 

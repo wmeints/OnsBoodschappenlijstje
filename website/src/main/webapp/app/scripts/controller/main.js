@@ -18,10 +18,6 @@
                 item: item.item,
                 winkel: item.winkel,
                 done: item.done
-            }).success(function() {
-                BoodschappenService.findAll().success(function(data) {
-                    vm.items = data;
-                });
             });
         };
 
@@ -56,10 +52,6 @@
             BoodschappenService.create({
                 item: itemText,
                 winkel: winkelText
-            }).success(function() {
-                BoodschappenService.findAll().success(function(data) {
-                    vm.items = data;
-                });
             });
 
             vm.newItemText = '';
@@ -70,13 +62,16 @@
             $mdDialog.show({
                 templateUrl: 'app/templates/taskdialog.tmpl.html',
                 locals: {
-                    item: item
+                    item: item,
+                    BoodschappenService: BoodschappenService
                 },
                 controller: TaskDialogController
-            }).then(function() {
-                BoodschappenService.findAll().success(function(data) {
-                    vm.items = data;
-                });
+            });
+        };
+        
+        vm.refresh = function() {
+            BoodschappenService.findAll().success(function(data) {
+                vm.items = data;
             });
         };
 
@@ -87,7 +82,7 @@
         }
     };
 
-    function TaskDialogController($scope,$mdDialog,item) {
+    function TaskDialogController($scope,$mdDialog,item, BoodschappenService) {
         $scope.item = item;
         $scope.updatedItemText = item.item;
 
@@ -105,13 +100,15 @@
             var itemText = (itemParts && itemParts.length == 3 && itemParts[1].trim()) || $scope.updatedItemText;
             var winkelText = (itemParts && itemParts.length == 3 && itemParts[2].trim()) || '';
 
-            item.item = itemText;
-            item.winkel = winkelText;
-
+            // Send the update operation to the backend
+            // When that is succesful, update the frontend and close the dialog.
             BoodschappenService.update(item.id, {
                 item: itemText,
                 winkel: winkelText
             }).success(function() {
+                item.item = itemText;
+                item.winkel = winkelText;
+                
                 $mdDialog.hide();
             });
         };

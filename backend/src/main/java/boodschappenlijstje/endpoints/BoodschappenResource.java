@@ -12,6 +12,7 @@ import javax.ws.rs.*;
 
 @Component
 @Path("/item")
+@Produces("application/json")
 public class BoodschappenResource {
     private LijstRepository lijstRepository;
 
@@ -26,6 +27,7 @@ public class BoodschappenResource {
     }
 
     @POST
+    @Consumes("application/json")
     public Response createItem(CreateItemData data) {
         Lijst insertedItem = lijstRepository.save(new Lijst(data.getItem(), data.getWinkel()));
         return Response.status(200).entity(insertedItem).build();
@@ -33,14 +35,36 @@ public class BoodschappenResource {
 
     @PUT
     @Path("{id}")
-    public Response updateItem(@PathParam("id") int id) {
-        return Response.status(200).entity(lijstRepository.save(lijstRepository.findById(id))).build();
+    @Consumes("application/json")
+    public Response updateItem(@PathParam("id") int id, UpdateItemData data) {
+        Lijst foundItem = lijstRepository.findById(id);
+
+        if(foundItem == null) {
+            GenericError error = new GenericError("Could not find the specified item");
+            return Response.status(404).entity(error).build();
+        }
+
+        foundItem.setDone(data.getDone());
+        foundItem.setItem(data.getItem());
+        foundItem.setWinkel(data.getWinkel());
+
+        Lijst savedItem = lijstRepository.save(foundItem);
+
+        return Response.status(200).entity(savedItem).build();
     }
-    
+
     @DELETE
     @Path("{id}")
     public Response deleteItem(@PathParam("id") int id) {
-        lijstRepository.remove(lijstRepository.findById(id));
+        Lijst foundItem = lijstRepository.findById(id);
+
+        if(foundItem == null) {
+            GenericError error = new GenericError("Could not find the specified item");
+            return Response.status(404).entity(error).build();
+        }
+
+        lijstRepository.remove(foundItem);
+
         return Response.noContent().build();
     }
 }
