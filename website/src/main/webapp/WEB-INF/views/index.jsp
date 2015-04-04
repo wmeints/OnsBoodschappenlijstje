@@ -14,7 +14,7 @@
         </h2>
     </md-toolbar>
     <md-content>
-        <div flex layout="row" class="item-input-form">
+        <div flex layout="row" class="item-input-form" ng-hide="vm.isAddingItem">
             <md-input-container flex>
                 <label>Item</label>
                 <input type="text" ui-keyup="{ 'enter': 'vm.saveItem()'}"  ng-model="vm.newItemText"/>
@@ -22,6 +22,10 @@
             <md-button class="md-primary" ng-click="vm.saveItem()">
                 <div class="icon-action-black icon-action-black-ic_shopping_cart_black_24dp"></div>
             </md-button>
+        </div>
+        <div flex layout-align="start center" layout="row" class="adding-item-progress" ng-show="vm.isAddingItem">
+            <md-progress-circular class="md-accent" md-mode="indeterminate"></md-progress-circular>
+            <div flex>Bezig met opslaan...</div>
         </div>
         <section>
             <md-subheader class="md-primary">Openstaande items</md-subheader>

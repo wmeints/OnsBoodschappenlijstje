@@ -1,10 +1,18 @@
 (function(angular) {
-    function MainController($mdDialog, BoodschappenService) {
+    function MainController($mdDialog, $mdToast, BoodschappenService) {
         var vm = this;
 
+        var toastPosition = {
+            bottom: true,
+            right: true,
+            top: false,
+            left: false
+        };
+        
         vm.newItemText = '';
         vm.items = [];
-
+        vm.isAddingItem = false;
+        
         init();
 
         vm.isSelected = function(item) {
@@ -22,10 +30,20 @@
         };
 
         vm.removeItem = function(item) {
-            BoodschappenService.remove(item.id).then(function() {
+            BoodschappenService.remove(item.id).success(function() {
                 BoodschappenService.findAll().success(function(data) {
                     vm.items = data;
+                }).error(function() {
+                    $mdToast.simple()
+                        .content('Oeps, kon de lijst niet vernieuwen. Neem contact op met de beheerder voor ondersteuning.')
+                        .position(toastPosition)
+                        .hideDelay(3000);
                 });
+            }).error(function() {
+                $mdToast.simple()
+                    .content('Oeps, kon het item niet verwijderen. Neem contact op met de beheerder voor ondersteuning.')
+                    .position(toastPosition)
+                    .hideDelay(3000);
             });
         };
 
@@ -34,6 +52,8 @@
             if(!vm.newItemText) {
                 return;
             }
+            
+            vm.isAddingItem = true;
 
             // Make the input simple, by allowing the user to enter Stuff @ Winkel
             var itemParts = vm.newItemText.match(/(.+)@(.*)/i);
@@ -43,19 +63,20 @@
             var itemText = (itemParts && itemParts.length == 3 && itemParts[1].trim()) || vm.newItemText;
             var winkelText = (itemParts && itemParts.length == 3 && itemParts[2].trim()) || '';
 
-            vm.items.push({
-                done: false,
-                item: itemText,
-                winkel: winkelText
-            });
-
             BoodschappenService.create({
                 item: itemText,
                 winkel: winkelText
+            }).success(function(data) {
+                vm.items.push(data);
+                
+                vm.isAddingItem = false;
+                vm.newItemText = '';
+            }).error(function() {
+                $mdToast.simple()
+                    .content('Oeps, kon het item niet op de lijst zetten. Neem contact op met de beheerder voor ondersteuning.')
+                    .position(toastPosition)
+                    .hideDelay(3000);
             });
-
-            vm.newItemText = '';
-            vm.newItemWinkel = '';
         };
 
         vm.editItem = function(item) {
@@ -72,12 +93,22 @@
         vm.refresh = function() {
             BoodschappenService.findAll().success(function(data) {
                 vm.items = data;
+            }).error(function() {
+                $mdToast.simple()
+                    .content('Oeps, kon de lijst niet vernieuwen. Neem contact op met de beheerder voor ondersteuning.')
+                    .position(toastPosition)
+                    .hideDelay(3000);
             });
         };
 
         function init() {
             BoodschappenService.findAll().success(function(data) {
                vm.items = data;
+            }).error(function() {
+                $mdToast.simple()
+                    .content('Oeps, kon de lijst niet vernieuwen. Neem contact op met de beheerder voor ondersteuning.')
+                    .position(toastPosition)
+                    .hideDelay(3000);
             });
         }
     };
@@ -110,6 +141,11 @@
                 item.winkel = winkelText;
                 
                 $mdDialog.hide();
+            }).error(function() {
+                $mdToast.simple()
+                    .content('Oeps, kon het item niet opslaan. Neem contact op met de beheerder voor ondersteuning.')
+                    .position(toastPosition)
+                    .hideDelay(3000);
             });
         };
 
@@ -118,7 +154,7 @@
         };
     };
 
-    MainController.$inject = ['$mdDialog', 'BoodschappenService'];
+    MainController.$inject = ['$mdDialog', '$mdToast', 'BoodschappenService'];
 
     angular.module('boodschappenlijstje').controller('MainCtrl',MainController);
 })(angular);
