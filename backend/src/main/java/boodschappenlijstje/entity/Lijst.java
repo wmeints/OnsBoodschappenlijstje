@@ -17,23 +17,23 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table(name = "lijst")
 @XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Lijst.findAll", query = "SELECT l FROM Lijst l"),
-    @NamedQuery(name = "Lijst.findById", query = "SELECT l FROM Lijst l WHERE l.id = :id"),
-    @NamedQuery(name = "Lijst.findByDone", query = "SELECT l FROM Lijst l WHERE l.done = :done")})
 public class Lijst implements Serializable {
     private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
+
     @Column(name = "done")
     private Boolean done;
+
     @Lob
     @Size(max = 65535)
     @Column(name = "item")
     private String item;
+
     @Lob
     @Size(max = 65535)
     @Column(name = "winkel")
@@ -95,14 +95,16 @@ public class Lijst implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Lijst)) {
             return false;
         }
+
         Lijst other = (Lijst) object;
+
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
+
         return true;
     }
 

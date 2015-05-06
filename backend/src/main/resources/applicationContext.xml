@@ -1,21 +1,18 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
-  xmlns:context="http://www.springframework.org/schema/context"
-  xmlns:tx="http://www.springframework.org/schema/tx"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+       xsi:schemaLocation="
 http://www.springframework.org/schema/beans
 http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 http://www.springframework.org/schema/context
 http://www.springframework.org/schema/context/spring-context-3.0.xsd
 http://www.springframework.org/schema/tx
-http://www.springframework.org/schema/tx/spring-tx.xsd">
+http://www.springframework.org/schema/tx/spring-tx.xsd
+http://www.springframework.org/schema/data/jpa
+http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
     <context:component-scan base-package="boodschappenlijstje" />
-
-    <!-- Entity manager factory: Used to talk to the database -->
-    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean" depends-on="flyway">
-        <property name="persistenceUnitName" value="ons-boodschappen-lijstje_backend_war_1.0-SNAPSHOTPU"/>
-    </bean>
 
     <!-- Transaction configuration: This is used to make working with transactions more straight forward -->
     <tx:annotation-driven transaction-manager="transactionManager"/>
@@ -23,7 +20,17 @@ http://www.springframework.org/schema/tx/spring-tx.xsd">
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
 
-    <!-- Migration configuration: This combination is used for data migration only -->
+    <!-- Stuff needed to talk to the database -->
+    <jpa:repositories base-package="boodschappenlijstje.entity"/>
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" depends-on="flyway">
+        <property name="jpaVendorAdapter" ref="vendorAdapter"/>
+        <property name="packagesToScan" value="boodschappenlijstje.entity"/>
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <bean id="vendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+        <property name="generateDdl" value="false"/>
+        <property name="showSql" value="true"/>
+    </bean>
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
         <property name="url" value="jdbc:mysql://db:3306/boodschappendb?zeroDateTimeBehavior=convertToNull"/>

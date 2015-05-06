@@ -63,7 +63,7 @@ public class BoodschappenResource {
             return Response.status(404).entity(error).build();
         }
 
-        lijstRepository.remove(foundItem);
+        lijstRepository.delete(foundItem);
 
         return Response.noContent().build();
     }
