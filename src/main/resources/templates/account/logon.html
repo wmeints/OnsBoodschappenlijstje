@@ -1,11 +1,38 @@
-<p th:if="${param.logout}" class="alert">You have been logged out</p>
-<p th:if="${param.error}" class="alert alert-error">There was an error, please try again</p>
-<h2>Login with Username and Password</h2>
-<form name="form" th:action="@{/account/logon}" action="/account/logon" method="POST">
-    <fieldset>
-        <input type="text" name="username" value="" placeholder="Username" />
-        <input type="password" name="password" placeholder="Password" />
-    </fieldset>
-    <input type="submit" id="login" value="Login"
-           class="btn btn-primary" />
-</form>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Boodschappenlijstje</title>
+    <link rel="stylesheet" type="text/css" href="/app/bower_components/angular-material/angular-material.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/app/bower_components/angular-ui/build/angular-ui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/app/styles/sprite-action-black.css" />
+    <link rel="stylesheet" type="text/css" href="/app/styles/app.css"/>
+</head>
+<body ng-app="boodschappenlijstje" layout="column" ng-controller="LogonCtrl as vm">
+    <md-toolbar>
+        <h2 class="md-toolbar-tools">
+            <span>Boodschappen</span>
+        </h2>
+    </md-toolbar>
+    <md-content>
+        <p th:if="${param.logout}" class="alert">You have been logged out</p>
+        <p th:if="${param.error}" class="alert alert-error">There was an error, please try again</p>
+        <h2>Login with Username and Password</h2>
+        <form name="form" th:action="@{/account/logon}" action="/account/logon" method="POST">
+            <fieldset>
+                <input type="text" name="username" value="" placeholder="Username" />
+                <input type="password" name="password" placeholder="Password" />
+            </fieldset>
+            <input type="submit" id="login" value="Login"
+                   class="btn btn-primary" />
+        </form>
+    </md-content>
+    <script type="text/javascript" src="/app/bower_components/angular/angular.min.js"></script>
+    <script type="text/javascript" src="/app/bower_components/angular-animate/angular-animate.min.js"></script>
+    <script type="text/javascript" src="/app/bower_components/angular-aria/angular-aria.min.js"></script>
+    <script type="text/javascript" src="/app/bower_components/angular-material/angular-material.min.js"></script>
+    <script type="text/javascript" src="/app/bower_components/angular-ui/build/angular-ui.min.js"></script>
+    <script type="text/javascript" src="/app/scripts/app.js"></script>
+    <script type="text/javascript" src="/app/scripts/service/boodschappen.js"></script>
+    <script type="text/javascript" src="/app/scripts/controller/logon.js"></script>
+</body>
+</html>
