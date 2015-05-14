@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface BoodschappenlijstItemRepository extends CrudRepository<BoodschappenlijstItem, Long> {
 
-    public List<BoodschappenlijstItem> findByID(Long id);
+    public BoodschappenlijstItem findByID(Long id);
 
 }
 

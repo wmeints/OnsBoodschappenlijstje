@@ -47,4 +47,16 @@ public class BoodschappenlijstItem {
     public String getWinkel() {
         return winkel;
     }
+
+    public void setDone(Boolean done) {
+        this.done = done;
+    }
+
+    public void setItem(String item) {
+        this.item = item;
+    }
+
+    public void setWinkel(String winkel) {
+        this.winkel = winkel;
+    }
 }
