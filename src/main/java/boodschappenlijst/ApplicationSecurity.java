@@ -18,6 +18,8 @@ public class ApplicationSecurity extends WebSecurityConfigurerAdapter {
     private DataSource dataSource;
 
     public void configure(HttpSecurity httpSecurity) throws Exception {
+        httpSecurity.csrf().disable();
+
         httpSecurity.authorizeRequests()
                 .antMatchers("/app/**")
                 .permitAll()
