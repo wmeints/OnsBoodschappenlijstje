@@ -1,0 +1,20 @@
+md-toolbar h1 {
+    margin: auto;
+}
+
+.item-input-form {
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.todo-item md-item-content {
+    padding-right: 16px;
+}
+
+.completed-todo-item .md-label {
+    text-decoration: line-through;
+}
+
+.subtle {
+    color: #c0c0c0;
+}
