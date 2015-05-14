@@ -9,9 +9,13 @@
 </head>
 <body ng-app="boodschappenlijstje" layout="column" ng-controller="MainCtrl as vm">
 <md-toolbar>
-    <h2 class="md-toolbar-tools">
-        <span>Boodschappen</span>
-    </h2>
+    <div class="md-toolbar-tools">
+        <h2>
+            <span>Boodschappen</span>
+        </h2>
+        <span flex=""></span>
+        <a href="/account/logoff" class="md-button">Logout</a>
+    </div>
 </md-toolbar>
 <md-content>
     <div flex="" layout="row" class="item-input-form" ng-hide="vm.isAddingItem">
@@ -23,7 +27,7 @@
             <div class="icon-action-black icon-action-black-ic_shopping_cart_black_24dp"></div>
         </md-button>
     </div>
-    <div flex="" layout-align="start center" layout="row" class="adding-item-progress" ng-show="vm.isAddingItem">
+    <div flex="" layout-padding="30px" layout-align="start center" layout="row" class="adding-item-progress" ng-show="vm.isAddingItem">
         <md-progress-circular class="md-accent" md-mode="indeterminate"></md-progress-circular>
         <div flex="">Bezig met opslaan...</div>
     </div>

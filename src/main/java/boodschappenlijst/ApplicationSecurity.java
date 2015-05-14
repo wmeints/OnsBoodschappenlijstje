@@ -29,7 +29,12 @@ public class ApplicationSecurity extends WebSecurityConfigurerAdapter {
                 .authenticated()
                 .and()
                 .formLogin().loginPage("/account/logon").failureUrl("/account/logon?error")
+                .permitAll()
+                .and()
+                .logout()
+                .logoutUrl("/account/logoff")
                 .permitAll();
+
     }
 
     public void configure(AuthenticationManagerBuilder authentication) throws Exception {
