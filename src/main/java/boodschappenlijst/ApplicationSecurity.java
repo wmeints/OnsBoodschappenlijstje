@@ -18,8 +18,16 @@ public class ApplicationSecurity extends WebSecurityConfigurerAdapter {
     private DataSource dataSource;
 
     public void configure(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.authorizeRequests().anyRequest().fullyAuthenticated().and()
-                .formLogin().loginPage("/account/logon").failureUrl("/account/logon?error").permitAll();
+        httpSecurity.authorizeRequests()
+                .antMatchers("/app/**")
+                .permitAll()
+                .and()
+                .authorizeRequests()
+                .anyRequest()
+                .authenticated()
+                .and()
+                .formLogin().loginPage("/account/logon").failureUrl("/account/logon?error")
+                .permitAll();
     }
 
     public void configure(AuthenticationManagerBuilder authentication) throws Exception {
